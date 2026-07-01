@@ -1,0 +1,52 @@
+# ------------------------------------------------
+# Author: Ryo Nakagami
+# Revised: 2026-06-30
+# File: Quarto website .gitignore
+# Description:
+#   Minimal .gitignore for Quarto website projects.
+#   Ignores:
+#     - Sandbox / temporary directories
+#     - Environment files
+#     - Cache and temporary files
+#     - Logs
+#     - Quarto generated content
+# ------------------------------------------------
+
+# ---- Temporary / sandbox directories ----
+sandbox/
+tmp/
+
+# ---- Environment / sensitive files ----
+.env
+env/
+ENV/
+env.bak/
+config/
+*.gpg
+
+# ---- Cache / temporary files ----
+.DS_Store
+*.swp
+*~
+*.tmp
+*.bak
+*.old
+
+# ---- Logs ----
+logs/
+*.log
+
+# ---- Quarto generated files ----
+_site/
+_freeze/
+_book/
+.quarto/
+**/*.quarto_ipynb
+
+# ---- Quarto Lua extension tooling ----
+/.luarc.json
+
+# ---- Optional: BFG Repo-Cleaner artifacts ----
+.bfg/
+..bfg-report
+bfg_check_list/

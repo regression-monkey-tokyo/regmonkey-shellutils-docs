@@ -1,0 +1,7 @@
+name: card-grid
+version: 1.0.0
+contributes:
+  shortcodes:
+    - card-grid.lua
+  filters:
+    - card-grid.lua
