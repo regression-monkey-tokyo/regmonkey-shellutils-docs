@@ -1,0 +1,54 @@
+---
+title: "isoweek"
+description: "Calculate the ISO 8601 week number for a given date or datetime"
+---
+
+## Overview
+
+`isoweek` calculates the **ISO 8601 week number** (01–53) for a given date or
+datetime string. Supports both local time and UTC.
+
+```bash
+$ isoweek 2025-01-03
+01
+
+$ isoweek -u 2025-12-31
+01
+```
+
+## Dependencies
+
+- `date` (GNU coreutils)
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `-u, --utc` | Calculate using UTC time |
+| `-h, --help` | Show help and exit. |
+
+## Arguments
+
+| Argument | Description |
+|----------|-------------|
+| `DATETIME` | Date or datetime string accepted by GNU `date -d` (required) |
+
+## Usage
+
+```bash
+# ISO week for a date (local time)
+isoweek 2025-01-03
+
+# ISO week in UTC
+isoweek -u 2025-01-03
+
+# Full datetime string
+isoweek 2024-12-30T00:00:00+09:00
+```
+
+## Notes
+
+- ISO week 1 is the week containing the first Thursday of the year.
+- `2025-01-03` falls in **week 01** of 2025.
+- `2024-12-30` falls in **week 01** of 2025 (not week 53 of 2024).
+- The script uses GNU `date -d`; macOS `date` is not compatible.

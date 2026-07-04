@@ -1,0 +1,63 @@
+---
+title: "show-colors"
+description: "Display a named color palette as a truecolor ANSI table or JSON"
+---
+
+## Overview
+
+`show-colors` displays a table of named colors from a YAML palette file,
+rendering each color name **in its own color** using 24-bit (truecolor) ANSI
+escape sequences. With `--json`, the palette is exported as a JSON object.
+
+Two palettes are available:
+
+- `default` — a broad X11/CSS4 named-color set
+- `regmonkey` — the project's custom branded palette
+
+## Dependencies
+
+- `yamlcli` — for parsing the YAML config
+- `jq` — for JSON output and palette loading
+- A terminal that supports 24-bit truecolor ANSI
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `-p, --palette <name>` | Palette to display: `default` or `regmonkey` (default: `default`) |
+| `-j, --json` | Output the palette as a JSON object instead of a table |
+| `-v, --version` | Show version and exit. |
+| `-h, --help` | Show help and exit. |
+
+## Usage
+
+```bash
+# Default palette as a table
+show-colors
+
+# regmonkey palette
+show-colors -p regmonkey
+
+# Export default palette as JSON
+show-colors --json
+
+# Export regmonkey palette as JSON
+show-colors -p regmonkey -j
+```
+
+## Example output (table)
+
+```
+| Color Name        Hex       | Color Name        Hex       |
+|----------------------------|-----------------------------|
+| aliceblue         #F0F8FF  | antiquewhite      #FAEBD7   |
+| aqua              #00FFFF  | aquamarine        #7FFFD4   |
+...
+```
+
+Each name is rendered in its corresponding color in a truecolor-capable terminal.
+
+## Notes
+
+- The config file is `config/color_config.yml`, resolved relative to the script.
+- Override the config path with the `CONFIG_FILE` environment variable (used in tests).

@@ -1,0 +1,54 @@
+---
+title: "convert-to-uploadable-mp4"
+description: "Transcode any video to a widely-compatible H.264/AAC MP4 with fast-start"
+---
+
+## Overview
+
+`convert-to-uploadable-mp4` transcodes a video into a **widely-compatible, upload-ready MP4**
+using `ffmpeg`. It enforces:
+
+- **H.264** video (`libx264`) with `yuv420p` chroma subsampling
+- A baseline-friendly profile/level for broad device support
+- **AAC** audio
+- `+faststart` so the `moov` atom sits at the front of the file, enabling
+  progressive download and instant playback while uploading.
+
+```bash
+convert_to_uploadable_mp4 input.mov
+convert_to_uploadable_mp4 -c 20 -o out.mp4 input.mkv
+```
+
+## Dependencies
+
+- `ffmpeg` on `PATH`
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `-c <num>` | H.264 CRF quality, 0–51 (lower = better / larger; default: `18`) |
+| `-s <num>` | Downscale so the longer side is at most `<num>` px (preserves aspect ratio) |
+| `-o <path>` | Output path (default: `<INPUT_STEM>_uploadable.mp4`) |
+| `-y` | Overwrite the output file if it already exists |
+| `-h` | Show help and exit. |
+
+## Usage
+
+```bash
+# Basic — convert input.mov
+convert_to_uploadable_mp4 input.mov
+
+# Set quality and output path
+convert_to_uploadable_mp4 -c 20 -o out.mp4 input.mkv
+
+# Downscale to 1080p max and force overwrite
+convert_to_uploadable_mp4 -s 1080 -y -o small.mp4 input.mp4
+```
+
+## Notes
+
+- The output is guaranteed to have even dimensions (required by `yuv420p`).
+- Without `-y`, the script exits with an error if the output file already exists.
+- CRF 18 is visually lossless for most content; higher values trade quality for
+  smaller files.

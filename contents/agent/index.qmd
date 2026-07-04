@@ -1,0 +1,29 @@
+---
+title: "AI Agent"
+description: "Shell wrappers that pipe terminal input to Claude and Codex CLIs"
+toc: false
+---
+
+Scripts in this category let you drive AI agents directly from the command line.
+They are designed to be **composable** — pipe any command output into them as context.
+
+| Script | Backend | Summary |
+|--------|---------|---------|
+| [claude-stdin-prompt](claude-stdin-prompt.qmd) | Claude CLI | Pipe stdin + a prompt to Claude; returns the response to stdout |
+| [codex-stdin-prompt](codex-stdin-prompt.qmd) | OpenAI Codex CLI | Same pattern for the OpenAI Codex agent |
+| [generate-headline](generate-headline.qmd) | Claude or Codex | Re-phrase text into three headline styles (shortened / noun-ending / slide-title) |
+
+## Typical pattern
+
+```bash
+# Any command whose output you want analyzed
+<command> | <agent-script> -p "your instruction"
+```
+
+Examples:
+
+```bash
+git diff --cached | claude-stdin-prompt -p "Write a commit message"
+cat meeting-notes.md | generate-headline
+curl -s api/data.json | codex-stdin-prompt --model o4-mini -p "Summarize this JSON"
+```

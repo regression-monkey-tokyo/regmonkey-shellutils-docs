@@ -1,0 +1,37 @@
+---
+title: "User Guide"
+description: "Overview of all regmonkey-shellutils script categories"
+toc: false
+---
+
+This guide covers every script in **regmonkey-shellutils**, organized by category.
+Each page documents options, usage examples, and notes on dependencies.
+
+:::{.card-grid}
+
+```yml
+cards:
+  - title: "🤖 AI Agent"
+    href: "agent/index.qmd"
+    desc: "Pipe stdin to Claude or Codex from the terminal. Generate headlines, commit messages, and summaries."
+  # - title: "✏️ Text Editing"
+  #   href: "editing/index.qmd"
+  #   desc: "Convert Japanese punctuation, re-encode files to UTF-8 with automatic encoding detection."
+  # - title: "📁 Filesystem"
+  #   href: "filesystem/index.qmd"
+  #   desc: "Parallel disk-usage viewer, atomic file creation with automatic parent-directory creation."
+  # - title: "🐧 Linux System"
+  #   href: "linux/index.qmd"
+  #   desc: "Memory bar graphs, login sessions, per-user resource usage, system info fetcher, and user listing."
+  # - title: "📊 Measurement"
+  #   href: "measurement/index.qmd"
+  #   desc: "Continuous hardware sensor logging to JSONL, shell built-in benchmarks across bash/ksh/zsh."
+  # - title: "🌐 Network"
+  #   href: "network/index.qmd"
+  #   desc: "GitHub status check with timing breakdown, global IP lookup, IPv4/IPv6 ping connectivity test."
+  # - title: "🔧 Utilities"
+  #   href: "utils/index.qmd"
+  #   desc: "ISO week calculator, random password generator, zsh history search, color palette display, video converter."
+```
+
+:::

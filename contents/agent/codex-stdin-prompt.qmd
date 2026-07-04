@@ -1,0 +1,70 @@
+---
+title: "codex-stdin-prompt"
+description: "Pipe stdin and a prompt to the OpenAI Codex CLI in non-interactive mode"
+---
+
+## Overview
+
+`codex-stdin-prompt` mirrors `claude-stdin-prompt` but targets the
+[OpenAI Codex CLI](https://github.com/openai/codex).
+It pipes stdin with a prompt to `codex exec` in quiet mode and writes the response to stdout.
+
+```bash
+git diff --cached | codex-stdin-prompt --model o4-mini -p "Write a commit message"
+cat data.csv | codex-stdin-prompt --model gpt-4o "Identify outliers"
+```
+
+## Dependencies
+
+- [`codex` CLI](https://github.com/openai/codex) on `PATH`
+  (`npm install -g @openai/codex`)
+
+## Options
+
+### Wrapper-owned options
+
+| Option | Description |
+|--------|-------------|
+| `-p, --prompt <text\|file>` | Prompt text, or path to a file whose contents are used as the prompt. Also accepted as a bare positional argument. |
+| `--context-file <text\|file>` | Context placed before the prompt. Value is read as a file when it points to one, otherwise treated as a literal string. Repeatable. |
+| `--custom-verbose` | Stream Codex's full progress output to the terminal instead of suppressing it. |
+| `-h, --help` | Show help and exit. |
+| `--` | End wrapper parsing; remaining arguments are forwarded to `codex` verbatim. |
+
+### Forwarded options
+
+All other flags are forwarded to `codex` verbatim — `--model`, `--provider`,
+`--approval-mode`, etc.
+
+::: {.callout-note}
+`--dangerously-bypass-approvals-and-sandbox` is injected automatically so that
+Codex does not prompt for tool approvals during text generation tasks.
+:::
+
+## Usage
+
+```bash
+# Basic — pipe output with a prompt
+git diff --cached | codex-stdin-prompt --model o4-mini -p "Write a commit message"
+
+# Read from a file
+codex-stdin-prompt --model o4-mini --prompt-file prompts/review.md < diff.patch
+
+# Bare positional prompt
+cat data.csv | codex-stdin-prompt --model o4-mini "Identify outliers"
+
+# Stack context blocks
+git diff --cached | codex-stdin-prompt \
+    --context-file docs/commit-rules.md \
+    --context-file "Output in Japanese" \
+    -p "Generate a commit message"
+
+# Show full Codex progress stream
+cat report.md | codex-stdin-prompt --model o4-mini --custom-verbose -p "Review this"
+```
+
+## Notes
+
+- **stdin is mandatory.** Running with a TTY on stdin exits with an error.
+- Only the final agent message is printed by default; use `--custom-verbose` to
+  see Codex's full progress stream.

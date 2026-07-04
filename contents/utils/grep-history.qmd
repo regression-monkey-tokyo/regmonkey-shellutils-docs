@@ -1,0 +1,55 @@
+---
+title: "grep-history"
+description: "Search zsh extended history with timestamps in human-readable form"
+---
+
+## Overview
+
+`grep-history` searches the zsh history file for a pattern and prints matching
+commands with their timestamps in a human-readable format.
+
+```bash
+$ grep-history docker
+2026-06-18 09:14:32: docker ps -a
+2026-06-17 15:03:11: docker compose up -d
+```
+
+It reads zsh's **EXTENDED_HISTORY** format (`: <timestamp>:<elapsed>;<command>`)
+and reformats timestamps as `YYYY-MM-DD HH:MM:SS`.
+
+## Dependencies
+
+- `grep`, `awk` — standard POSIX tools
+- The `$HISTORYFILE` environment variable must be set, **or** supply the path
+  with `-f`
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `-f, --file <FILE>` | History file to search (overrides `$HISTORYFILE`) |
+| `-v, --version` | Show version and exit. |
+| `-h, --help` | Show help and exit. |
+
+## Usage
+
+```bash
+# Search for "docker"
+grep-history docker
+
+# Search with a regex
+grep-history 'git.*rebase'
+
+# Use an explicit history file
+grep-history -f ~/.zsh_history docker
+
+# Or set HISTORYFILE in ~/.zshrc
+export HISTORYFILE="$HOME/.zsh_history"
+grep-history docker
+```
+
+## Notes
+
+- Lines in the history file that do not match the EXTENDED_HISTORY format
+  (e.g., older plain-format entries) are printed as-is.
+- `$HISTORYFILE` is typically set in `~/.zshrc` as `export HISTORYFILE="$HISTFILE"`.

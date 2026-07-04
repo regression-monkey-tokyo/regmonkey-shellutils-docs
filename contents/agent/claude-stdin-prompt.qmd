@@ -1,0 +1,95 @@
+---
+title: "claude-stdin-prompt"
+description: "Pipe stdin and a prompt to the Claude CLI in non-interactive mode"
+---
+
+## Overview
+
+`claude-stdin-prompt` sends piped or redirected stdin together with a prompt to the
+`claude` CLI (`--print` mode) and writes the response to stdout.
+
+It is designed for **shell pipelines**: any command whose output you want Claude
+to process can be placed before `|`.
+
+```bash
+git diff --cached | claude-stdin-prompt -p "Write a commit message"
+claude-stdin-prompt -p "Summarize" < memo.md
+```
+
+## Dependencies
+
+- [`claude` CLI](https://github.com/anthropics/claude-code) on `PATH`
+
+## Options
+
+### Wrapper-owned options
+
+| Option | Description |
+|--------|-------------|
+| `-p, --prompt <text>` | Prompt text (literal string). Also accepted as a bare positional argument. |
+| `--prompt-file <path>` | Path to a file whose contents are used as the prompt. Mutually exclusive with `-p`. |
+| `--context <text>` | Literal context block placed **before** the prompt. Repeatable. |
+| `--context-file <path>` | File used as a context block. Repeatable; may be mixed with `--context`. |
+| `-h, --help` | Show help and exit. |
+| `--` | End wrapper parsing; remaining arguments are forwarded to `claude` verbatim. |
+
+### Forwarded options
+
+All other flags are passed through to `claude` verbatim — `--model`, `--output-format`,
+`--append-system-prompt`, `--add-dir`, `--max-budget-usd`, etc.
+See `claude --help` for the full list.
+
+::: {.callout-note}
+`--print` is always injected automatically; you do not need to add it.
+:::
+
+## Usage
+
+```bash
+# Basic usage — pipe a command's output with a prompt
+<command> | claude-stdin-prompt -p "PROMPT"
+
+# Explicit prompt flag
+git diff --cached | claude-stdin-prompt -p "Write a conventional commit message"
+
+# Read from a file
+claude-stdin-prompt -p "Summarize" < memo.md
+
+# Specify model
+git log -n 20 | claude-stdin-prompt --model opus -p "Generate release notes"
+
+# Prompt from a file
+cat data.csv | claude-stdin-prompt --prompt-file prompts/analyze.md
+
+# Add context before the prompt
+git diff --cached | claude-stdin-prompt \
+    --context-file docs/commit-rules.md \
+    --context "Output in Japanese" \
+    -p "Generate a commit message"
+```
+
+## How it works
+
+The script composes the following structure and passes it to `claude --print`:
+
+```
+# Context        ← optional, from --context / --context-file
+<context content>
+
+---
+
+# Instruction
+<your prompt>
+
+---
+
+# stdin
+<piped input>
+```
+
+## Notes
+
+- **stdin is mandatory.** Running with a TTY on stdin exits with an error.
+- The default model is `sonnet` when `--model` is not specified.
+- Boolean claude flags placed immediately before a bare positional prompt can
+  confuse argument parsing. Use `-p/--prompt` explicitly to disambiguate.

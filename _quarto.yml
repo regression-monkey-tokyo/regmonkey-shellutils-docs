@@ -1,0 +1,127 @@
+project:
+  type: website
+  output-dir: _site
+  preview:
+    port: 4242
+    
+website:
+  title: "regmonkey-shellutils"
+  description: "A curated collection of shell utilities for Linux developers"
+  site-url: "https://regression-monkey-tokyo.github.io/regmonkey-shellutils-contents/"
+  repo-url: "https://github.com/RyoNakagami/regmonkey-shellutils"
+  repo-actions: [issue]
+
+  navbar:
+    background: primary
+    foreground: light
+    title: "regmonkey-shellutils"
+    left:
+      - text: "User Guide"
+        href: contents/index.qmd
+      - text: "Installation"
+        href: contents/installation.qmd
+    right:
+      - icon: github
+        href: "https://github.com/RyoNakagami/regmonkey-shellutils"
+        aria-label: GitHub
+
+  sidebar:
+    style: "docked"
+    search: false
+    background: light
+    contents:
+      - section: "Getting Started"
+        contents:
+          - text: "Installation"
+            href: contents/installation.qmd
+      - text: "---"
+      - section: "AI Agent"
+        href: contents/agent/index.qmd
+        contents:
+          - text: "claude-stdin-prompt"
+            href: contents/agent/claude-stdin-prompt.qmd
+          - text: "codex-stdin-prompt"
+            href: contents/agent/codex-stdin-prompt.qmd
+          - text: "generate-headline"
+            href: contents/agent/generate-headline.qmd
+      # - section: "Text Editing"
+      #   href: contents/editing/index.qmd
+      #   contents:
+      #     - text: "punkt"
+      #       href: contents/editing/punkt.qmd
+      #     - text: "utf8ify"
+      #       href: contents/editing/utf8ify.qmd
+      # - section: "Filesystem"
+      #   href: contents/filesystem/index.qmd
+      #   contents:
+      #     - text: "fast-du"
+      #       href: contents/filesystem/fast-du.qmd
+      #     - text: "ptouch"
+      #       href: contents/filesystem/ptouch.qmd
+      # - section: "Linux System"
+      #   href: contents/linux/index.qmd
+      #   contents:
+      #     - text: "check-memory"
+      #       href: contents/linux/check-memory.qmd
+      #     - text: "check-reboot-required"
+      #       href: contents/linux/check-reboot-required.qmd
+      #     - text: "check-usages-by-user"
+      #       href: contents/linux/check-usages-by-user.qmd
+      #     - text: "loginstat"
+      #       href: contents/linux/loginstat.qmd
+      #     - text: "passwd-ls"
+      #       href: contents/linux/passwd-ls.qmd
+      #     - text: "sysfetch"
+      #       href: contents/linux/sysfetch.qmd
+      # - section: "Measurement"
+      #   href: contents/measurement/index.qmd
+      #   contents:
+      #     - text: "sensor-logger"
+      #       href: contents/measurement/sensor-logger.qmd
+      #     - text: "shell-speed-check"
+      #       href: contents/measurement/shell-speed-check.qmd
+      # - section: "Network"
+      #   href: contents/network/index.qmd
+      #   contents:
+      #     - text: "check-github-connection"
+      #       href: contents/network/check-github-connection.qmd
+      #     - text: "fetch-globalip"
+      #       href: contents/network/fetch-globalip.qmd
+      #     - text: "ping-check"
+      #       href: contents/network/ping-check.qmd
+      # - section: "Utilities"
+      #   href: contents/utils/index.qmd
+      #   contents:
+      #     - text: "convert-to-uploadable-mp4"
+      #       href: contents/utils/convert-to-uploadable-mp4.qmd
+      #     - text: "generate-random-password"
+      #       href: contents/utils/generate-random-password.qmd
+      #     - text: "grep-history"
+      #       href: contents/utils/grep-history.qmd
+      #     - text: "isoweek"
+      #       href: contents/utils/isoweek.qmd
+      #     - text: "show-colors"
+      #       href: contents/utils/show-colors.qmd
+
+  page-footer:
+    center: |
+      © 2026 [regression-monkey-tokyo](https://github.com/regression-monkey-tokyo)
+
+filters:
+  - _extensions/card-grid/card-grid.lua
+
+format:
+  html:
+    theme: cosmo
+    css: styles/custom.css
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    code-copy: true
+    code-overflow: wrap
+    highlight-style: github
+    grid:
+      sidebar-width: 600px
+      body-width: 900px
+      margin-width: 200px
+      gutter-width: 1.5rem

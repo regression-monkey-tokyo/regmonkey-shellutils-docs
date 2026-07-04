@@ -1,0 +1,93 @@
+---
+title: "regmonkey-shellutils"
+pagetitle: "regmonkey-shellutils — Shell Script Utilities"
+page-layout: full
+toc: false
+---
+
+<div style="text-align:center; padding: 1rem 1rem 1rem;">
+
+<h1 style="font-size:2.8rem; font-weight:700; color:#1a6fa8; margin-bottom:0.5rem;">
+  regmonkey-shellutils
+</h1>
+<p style="font-size:1.2rem; color:#555; max-width:600px; margin:0 auto 2rem;">
+  A curated collection of shell script utilities for Linux developers —<br>
+  system monitoring, AI pipelines, file operations, and more.
+</p>
+
+<a href="docs/installation.qmd" class="btn btn-primary btn-lg" style="margin-right:0.8rem;">
+  Get Started
+</a>
+<a href="docs/index.qmd" class="btn btn-outline-secondary btn-lg">
+  User Guide
+</a>
+<a href="https://github.com/RyoNakagami/regmonkey-shellutils" class="btn btn-outline-dark btn-lg" style="margin-left:0.8rem;">
+  GitHub
+</a>
+
+</div>
+
+---
+
+## Why regmonkey-shellutils?
+
+Daily Linux workflows involve a lot of repetitive tasks — checking memory, grepping history, converting videos, pinging hosts. `regmonkey-shellutils` wraps these into clean, well-documented scripts that follow consistent conventions:
+
+- **Predictable options** — long and short flags (`--help` / `-h`), consistent error messages
+- **Composable** — designed for pipelines; most scripts read stdin or write stdout
+- **Zero dependencies** by default — use standard POSIX/GNU tools
+
+---
+
+## What's included
+
+:::{.card-grid}
+
+```yml
+cards:
+  - title: "🤖 AI Agent"
+    href: "docs/agent/index.qmd"
+    desc: "Pipe stdin to Claude or Codex from the terminal. Generate headlines, commit messages, and summaries."
+  # - title: "✏️ Text Editing"
+  #   href: "docs/editing/index.qmd"
+  #   desc: "Convert Japanese punctuation in bulk, re-encode files to UTF-8 with automatic detection."
+  # - title: "📁 Filesystem"
+  #   href: "docs/filesystem/index.qmd"
+  #   desc: "Parallel disk usage viewer, atomic file creation with parent-directory auto-creation."
+  # - title: "🐧 Linux System"
+  #   href: "docs/linux/index.qmd"
+  #   desc: "Memory bar graphs, login sessions, per-user resource usage, system info fetch, and more."
+  # - title: "📊 Measurement"
+  #   href: "docs/measurement/index.qmd"
+  #   desc: "Continuous hardware sensor logging (CPU/GPU/NVMe) to JSONL, shell built-in benchmarks."
+  # - title: "🌐 Network"
+  #   href: "docs/network/index.qmd"
+  #   desc: "GitHub status check with timing breakdown, global IP lookup, IPv4/IPv6 ping tests."
+  # - title: "🔧 Utilities"
+  #   href: "docs/utils/index.qmd"
+  #   desc: "ISO week calculator, random password generator, zsh history search, color palette display."
+```
+
+:::
+
+---
+
+## Quick Install
+
+```bash
+# Clone into ~/.local/share
+git clone https://github.com/RyoNakagami/regmonkey-shellutils.git \
+  ~/.local/share/regmonkey-shellutils
+
+# Add all bin/* subdirectories to PATH in ~/.zshrc
+REGMONKEY_SHELLUTILS_PATH="$HOME/.local/share/regmonkey-shellutils"
+_shellutils_root="${REGMONKEY_SHELLUTILS_PATH}/bin"
+if [[ -d "${_shellutils_root}" ]]; then
+  for _d in "${_shellutils_root}"/*/; do
+    [[ -d "${_d}" ]] && export PATH="${_d%/}:$PATH"
+  done
+fi
+unset _shellutils_root _d REGMONKEY_SHELLUTILS_PATH
+```
+
+See the [Installation guide](docs/installation.qmd) for more details.

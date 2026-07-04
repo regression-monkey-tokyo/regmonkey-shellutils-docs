@@ -1,0 +1,71 @@
+---
+title: "generate-headline"
+description: "Re-phrase text into three headline styles using Claude or Codex"
+---
+
+## Overview
+
+`generate-headline` takes a piece of text and produces **three re-phrasing directions**,
+each with multiple candidates:
+
+1. **短くする方向** — shorten while preserving meaning
+2. **体言止め** — noun-phrase ending for a dense, formal tone
+3. **スライド見出し** — catchy slide-title style using symbols and contrast
+
+The backend is `claude-stdin-prompt` by default; `--codex` switches to `codex-stdin-prompt`.
+
+```bash
+echo "四半期の売上は前年比15%増加し，特にSaaS部門が牽引した" | generate-headline
+generate-headline "Some text you want reworded"
+```
+
+## Dependencies
+
+- `claude-stdin-prompt` (default) or `codex-stdin-prompt` (with `--codex`) — both must be on `PATH`
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `--codex` | Use `codex-stdin-prompt` instead of `claude-stdin-prompt` |
+| `--model, -m <model>` | Model to use. Default for Claude: `sonnet`. Default for Codex: Codex's own default. |
+| `--candidate, -n <N>` | Number of candidates per direction (default: `3`) |
+| `-h, --help` | Show help and exit. |
+
+## Usage
+
+```bash
+# Pipe text
+echo "要約したい文章" | generate-headline
+
+# Pass as argument
+generate-headline "要約したい文章"
+
+# Read from a file
+generate-headline < input.txt
+
+# Use Codex backend with a specific model
+echo "テキスト" | generate-headline --codex --model o4-mini
+
+# Increase candidates to 5 per direction
+echo "テキスト" | generate-headline -n 5
+```
+
+## Example output
+
+```
+## 短くする方向
+- 四半期売上，前年比15%増
+- SaaS主導で売上15%成長
+- 売上15%増，SaaSが牽引
+
+## 体言止めで引き締める方向
+- 前年比15%増の売上達成
+- SaaS部門主導による増収
+- 四半期業績の上振れ確認
+
+## スライドの見出しっぽく
+- 売上+15%｜SaaSが成長エンジン
+- Q売上 → 前年比15%増，SaaS主導
+- 四半期: SaaSが牽引，売上15%超
+```

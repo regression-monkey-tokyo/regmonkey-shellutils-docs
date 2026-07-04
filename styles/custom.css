@@ -1,0 +1,156 @@
+/* ── Brand colors ── */
+:root {
+  --rm-primary:   #428CE6;
+  --rm-primary-d: #0E3666;
+  --rm-accent:    #e8760a;
+  --rm-sidebar-bg: #f5f7fa;
+  --rm-code-bg:   #f6f8fa;
+  --rm-border:    #dde1e7;
+}
+
+/* ── Navbar ── */
+.navbar {
+  background-color: var(--rm-primary) !important;
+  border-bottom: 0px solid var(--rm-accent);
+  padding-top: 0.3rem !important;
+  padding-bottom: 0.3rem !important;
+  min-height: unset !important;
+}
+.navbar .navbar-brand,
+.navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+.navbar-nav .nav-link:hover {
+  color: #f0c070 !important;
+}
+
+/* ── Sidebar ── */
+#quarto-sidebar {
+  background-color: var(--rm-sidebar-bg);
+  border-right: 1px solid var(--rm-border);
+}
+#quarto-sidebar .sidebar-title {
+  font-weight: 700;
+  color: var(--rm-primary);
+  font-size: 1rem;
+}
+.sidebar-item-text {
+  font-size: 1.0rem;
+}
+.menu-text {
+  font-size: 1.2rem;
+}
+#quarto-sidebar,
+.sidebar.sidebar-navigation {
+  width: 360px !important;
+  min-width: 360px !important;
+}
+#quarto-sidebar .sidebar-menu-container {
+  font-size: 2rem;
+  white-space: nowrap;
+  overflow: visible;
+}
+.sidebar-item.active > .sidebar-item-text,
+.sidebar-item.active > a {
+  color: var(--rm-primary) !important;
+  font-weight: 600;
+}
+.sidebar-section .sidebar-section-item {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* ── Active nav link highlight ── */
+.sidebar-item.active {
+  border-left: 3px solid var(--rm-accent);
+  padding-left: 0.4rem;
+}
+
+/* ── Navbar icons ── */
+.navbar .bi-github,
+.navbar .bi-search,
+.quarto-navigation-tool .bi {
+  font-size: 1.4rem;
+}
+
+/* ── Headings ── */
+h1, h2, h3 { color: #1a1a2e; }
+h2 { border-bottom: 1px solid var(--rm-border); padding-bottom: 0.3rem; margin-top: 2rem; }
+
+/* ── Code blocks ── */
+pre.sourceCode {
+  background-color: var(--rm-code-bg);
+  border: 1px solid var(--rm-border);
+  border-radius: 6px;
+}
+code {
+  background-color: var(--rm-code-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.88em;
+}
+
+/* ── Option/reference tables ── */
+table {
+  font-size: 0.9rem;
+}
+thead {
+  background-color: var(--rm-primary);
+  color: #ffffff;
+}
+tbody tr:nth-child(even) { background-color: #f0f4f8; }
+
+/* ── Card grid (user-guide overview) ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.rm-card {
+  border: 1px solid var(--rm-border);
+  border-radius: 8px;
+  padding: 1.2rem 1rem;
+  background: #ffffff;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.rm-card:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+.rm-card h4 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  color: var(--rm-primary);
+  border: none;
+}
+.rm-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+.rm-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── Callout ── */
+.callout { border-radius: 6px; }
+
+/* ── Footer ── */
+.nav-footer { border-top: 1px solid var(--rm-border); font-size: 0.85rem; }
+
+/* ── Margin sidebar (TOC) ── */
+#quarto-margin-sidebar {
+  order: 3;
+  position: sticky;
+  top: 0;
+}
+#quarto-margin-sidebar .toc-active,
+#quarto-margin-sidebar .nav-link {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}

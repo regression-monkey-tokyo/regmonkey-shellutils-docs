@@ -1,0 +1,12 @@
+meta-data:
+  repository_name: regmonkey-shellutils-docs
+  visibility: public
+  org-name: regression-monkey-tokyo
+  tag:
+    - cli-tool
+    - quarto
+    - documentation
+  description: |
+    This repository contains the documentation for the regmonkey-shellutils project, which is a collection of shell utilities developed by Regression Monkey Tokyo. The documentation is built using Quarto and is hosted on GitHub Pages.
+  homepage: null
+  license: mit

@@ -50,3 +50,5 @@ _book/
 .bfg/
 ..bfg-report
 bfg_check_list/
+
+/.quarto/

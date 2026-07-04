@@ -1,0 +1,13 @@
+---
+title: "Utilities"
+description: "General-purpose utilities: dates, passwords, history search, colors, and video"
+toc: false
+---
+
+| Script | Summary |
+|--------|---------|
+| [convert-to-uploadable-mp4](convert-to-uploadable-mp4.qmd) | Transcode any video to a widely-compatible H.264/AAC MP4 |
+| [generate-random-password](generate-random-password.qmd) | Generate a random base64 or numeric-only password |
+| [grep-history](grep-history.qmd) | Search zsh history with timestamps in human-readable form |
+| [isoweek](isoweek.qmd) | Calculate the ISO 8601 week number for a given date |
+| [show-colors](show-colors.qmd) | Display a named color palette table in truecolor ANSI |

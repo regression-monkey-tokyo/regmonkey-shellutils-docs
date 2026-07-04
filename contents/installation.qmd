@@ -1,0 +1,67 @@
+---
+title: "Installation"
+description: "How to install and set up regmonkey-shellutils"
+---
+
+## Requirements
+
+- Linux (Debian / Ubuntu recommended)
+- `zsh` or `bash` as your shell
+- `git` for cloning
+
+Individual scripts may require extra tools (e.g. `curl`, `jq`, `ffmpeg`).
+Each script's page lists its specific dependencies.
+
+## Clone the repository
+
+```bash
+git clone https://github.com/RyoNakagami/regmonkey-shellutils.git \
+  ~/.local/share/regmonkey-shellutils
+```
+
+## Add to PATH
+
+Add the following block to your `~/.zshrc` (or `~/.bashrc`).
+It discovers every subdirectory under `bin/` and prepends it to `PATH`.
+
+```bash
+REGMONKEY_SHELLUTILS_PATH="$HOME/.local/share/regmonkey-shellutils"
+_shellutils_root="${REGMONKEY_SHELLUTILS_PATH}/bin"
+if [[ -d "${_shellutils_root}" ]]; then
+  for _d in "${_shellutils_root}"/*/; do
+    [[ -d "${_d}" ]] && export PATH="${_d%/}:$PATH"
+  done
+fi
+unset _shellutils_root _d REGMONKEY_SHELLUTILS_PATH
+```
+
+Then reload your shell:
+
+```bash
+source ~/.zshrc
+```
+
+## Verify
+
+```bash
+# Check that a script is on PATH
+which check-memory
+
+# Run the help flag
+check-memory --help
+```
+
+## Updating
+
+```bash
+cd ~/.local/share/regmonkey-shellutils
+git pull
+```
+
+## Uninstalling
+
+Remove the directory and the PATH block you added to `~/.zshrc`:
+
+```bash
+rm -rf ~/.local/share/regmonkey-shellutils
+```
